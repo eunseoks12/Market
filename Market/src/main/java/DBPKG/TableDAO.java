@@ -179,4 +179,42 @@ public class TableDAO implements TableInterface{
 		}
 		return result;
 	}
+
+	@Override
+	public ArrayList<orderTableDTO> userorderSelect(String id) {
+		ArrayList<orderTableDTO> list = new ArrayList<>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = datasource.getConnection();
+			pstmt = con.prepareStatement(UserOrderList);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String orderid = rs.getString("orderid");
+				id = rs.getString("id");
+				String goodsid = rs.getString("goodsid");
+				int goodscount = rs.getInt("goodscount");
+				int totalprice = rs.getInt("totalprice");
+				
+				orderTableDTO dto = new orderTableDTO(orderid, id, goodsid, goodscount, totalprice);
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }

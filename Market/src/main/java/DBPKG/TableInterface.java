@@ -9,10 +9,12 @@ public interface TableInterface{
 	final String Search = "SELECT * FROM goods_tbl WHERE LOWER(goodsname) LIKE LOWER(?)";
 	final String UserDelete = "DELETE FROM user_tbl where id = ?";
 	final String Buy = "INSERT INTO order_tbl(orderid, id, goodsid, goodscount, totalprice) VALUES(?,?,?,?,?)";
+	final String UserOrderList = "SELECT * FROM order_tbl where id = ?";
 	
 	abstract int userLogin(String id, String pw);
 	abstract int userRegister(String id, String pw, String name, String phone, String email, String postcode, String address, String user_type);
 	abstract ArrayList<goodsTableDTO> goodsSearch(String search);
 	abstract int userDelete(String id);
 	abstract int productBuy(String orderid, String id, String goodsid, int goodscount, int totalprice);
+	abstract ArrayList<orderTableDTO> userorderSelect(String id);
 }
