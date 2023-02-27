@@ -10,10 +10,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="Header.jsp" />
 <table border="1" style=" border-collapse:collapse; width: 50%; text-align: center; margin: 0 auto; margin-top: 50px">
 <%
 	request.setCharacterEncoding("UTF-8");
 	String id = (String) session.getAttribute("id");
+	
+	if(id == null) {
+%>
+		<script>
+			location.href='Login.jsp?from=OrderList.jsp';
+		</script>
+<%
+	}
 	
 	TableDAO dao = new TableDAO();
 	ArrayList<orderTableDTO> list = dao.userorderSelect(id);
