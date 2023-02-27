@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table border="1" style="width: 50%; text-align: center; margin: 0 auto; margin-top: 50px">
+<table border="1" style=" border-collapse:collapse; width: 50%; text-align: center; margin: 0 auto; margin-top: 50px">
 <%
 	request.setCharacterEncoding("UTF-8");
 	String id = (String) session.getAttribute("id");
