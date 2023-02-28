@@ -152,18 +152,17 @@ public class TableDAO implements TableInterface{
 	}
 
 	@Override
-	public int productBuy(String orderid, String id, String goodsid, int goodscount, int totalprice) {
+	public int productBuy(String id, String goodsid, int goodscount, int totalprice) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
 			con = datasource.getConnection();
 			pstmt = con.prepareStatement(Buy);
-			pstmt.setString(1, orderid);
-			pstmt.setString(2, id);
-			pstmt.setString(3, goodsid);
-			pstmt.setInt(4, goodscount);
-			pstmt.setInt(5, totalprice);
+			pstmt.setString(1, id);
+			pstmt.setString(2, goodsid);
+			pstmt.setInt(3, goodscount);
+			pstmt.setInt(4, totalprice);
 			
 			result = pstmt.executeUpdate();
 			
